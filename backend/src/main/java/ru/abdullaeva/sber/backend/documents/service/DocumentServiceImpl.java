@@ -74,6 +74,7 @@ public class DocumentServiceImpl implements DocumentService {
             DocumentDto documentDto = customDocumentMapper.documentToDocumentDto(document);
             documentDtoList.add(documentDto);
         }
+        return documentDtoList;
     }
 
     @Override
