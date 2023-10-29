@@ -1,6 +1,5 @@
 package ru.abdullaeva.sber.backend.documents.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,15 +13,15 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StatusDto implements Serializable {
+public class Status implements Serializable {
     private String code;
     private String name;
 
-    public static StatusDto of(String code, String name) {
-        StatusDto statusDto = new StatusDto();
-        statusDto.setCode(code);
-        statusDto.setName(name);
-        return statusDto;
+    public static Status of(String code, String name) {
+        Status status = new Status();
+        status.setCode(code);
+        status.setName(name);
+        return status;
     }
 
 }

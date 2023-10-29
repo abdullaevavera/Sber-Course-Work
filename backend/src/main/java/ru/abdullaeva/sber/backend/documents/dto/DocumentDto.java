@@ -23,5 +23,5 @@ public class DocumentDto implements Serializable {
     private String description;
     private String patient;
     private Date date;
-    private String status;
+    private Status status;
 }
