@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.abdullaeva.sber'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+}
+
