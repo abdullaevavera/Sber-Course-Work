@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: ver.1-0/start-schema.yml
+      relativeToChangelogFile: true

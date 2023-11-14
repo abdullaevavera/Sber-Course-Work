@@ -19,16 +19,23 @@ java {
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('co.elastic.logging:logback-ecs-encoder:1.5.0')
-    implementation('org.apache.commons:commons-lang3:3.12.0')
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation('org.springframework.boot:spring-boot-starter-data-jdbc:2.3.4.RELEASE')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.3.4.RELEASE')
+    implementation('co.elastic.logging:logback-ecs-encoder:1.5.0')
+    implementation('org.apache.commons:commons-lang3:3.12.0')
     implementation('org.mapstruct:mapstruct:1.5.2.Final')
+    implementation("org.liquibase:liquibase-core:4.24.0")
+    implementation("org.springframework.kafka:spring-kafka")
+
     annotationProcessor('org.mapstruct:mapstruct-processor:1.5.2.Final')
+    annotationProcessor("org.projectlombok:lombok:1.18.28")
+
     runtimeOnly("org.postgresql:postgresql:42.6.0")
+
     compileOnly('org.mapstruct:mapstruct-processor:1.5.2.Final')
     compileOnly("org.projectlombok:lombok:1.18.28")
-    annotationProcessor("org.projectlombok:lombok:1.18.28")
+
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.testcontainers:postgresql:1.17.6')
 
