@@ -1,0 +1,22 @@
+server:
+  port: 8888
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+
+cors:
+  allow: true
+
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/courseWork
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: update

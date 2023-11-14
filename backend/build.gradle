@@ -25,8 +25,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.3.4.RELEASE')
     implementation('org.mapstruct:mapstruct:1.5.2.Final')
     annotationProcessor('org.mapstruct:mapstruct-processor:1.5.2.Final')
+    runtimeOnly("org.postgresql:postgresql:42.6.0")
     compileOnly('org.mapstruct:mapstruct-processor:1.5.2.Final')
-
     compileOnly("org.projectlombok:lombok:1.18.28")
     annotationProcessor("org.projectlombok:lombok:1.18.28")
     testImplementation('org.springframework.boot:spring-boot-starter-test')
