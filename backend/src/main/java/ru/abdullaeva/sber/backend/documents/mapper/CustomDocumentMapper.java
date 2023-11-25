@@ -6,9 +6,15 @@ import ru.abdullaeva.sber.backend.documents.dto.DocumentDto;
 import ru.abdullaeva.sber.backend.documents.model.Document;
 import ru.abdullaeva.sber.backend.documents.dto.Status;
 
+/**
+ * Кастомный маппер документов
+ */
 @Component
 @RequiredArgsConstructor
 public class CustomDocumentMapper {
+    /**
+     * Метод маппит сущность "документ" на дто документа
+     */
     public DocumentDto documentToDocumentDto(Document document) {
         DocumentDto documentDto = new DocumentDto();
         documentDto.setId(document.getId());
@@ -20,7 +26,11 @@ public class CustomDocumentMapper {
         documentDto.setStatus(initStatus(document.getStatus()));
         return documentDto;
     }
-        private Status initStatus (String statusCode){
+
+    /**
+     * Метод устанавливает название статуса в зависимости от установленного кода
+     */
+    private Status initStatus (String statusCode){
             switch (statusCode) {
                 case ("NEW") -> {
                     return Status.of(statusCode, "Новый");

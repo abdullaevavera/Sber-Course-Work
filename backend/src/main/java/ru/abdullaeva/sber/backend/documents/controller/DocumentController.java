@@ -1,6 +1,6 @@
 package ru.abdullaeva.sber.backend.documents.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.abdullaeva.sber.backend.documents.dto.DocumentDto;
 import ru.abdullaeva.sber.backend.documents.dto.IdDto;
 import ru.abdullaeva.sber.backend.documents.dto.IdsDto;
-import ru.abdullaeva.sber.backend.documents.service.DocumentService;
+import ru.abdullaeva.sber.backend.documents.service.interf.DocumentService;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/documents")
 public class DocumentController {
 
-    @Autowired
-    private DocumentService documentService;
+    private final DocumentService documentService;
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -40,9 +40,9 @@ public class DocumentController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public DocumentDto send(@RequestBody IdDto id) {
-
         return documentService.update(id);
     }
+
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable Long id) {
         documentService.delete(id);

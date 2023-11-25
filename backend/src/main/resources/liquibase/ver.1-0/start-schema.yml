@@ -45,3 +45,41 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
+        - createTable:
+            tableName: outbox
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: outbox_pk
+                    nullable: false
+              - column:
+                  name: payload
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: inbox
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: inbox_pk
+                    nullable: false
+              - column:
+                  name: payload
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reading
+                  type: boolean
+                  constraints:
+                    nullable: false

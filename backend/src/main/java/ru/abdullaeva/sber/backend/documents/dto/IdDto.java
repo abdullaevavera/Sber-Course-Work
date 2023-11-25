@@ -9,6 +9,9 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+/**
+ * Идентификатор документа
+ */
 @Getter
 @Setter
 @Builder

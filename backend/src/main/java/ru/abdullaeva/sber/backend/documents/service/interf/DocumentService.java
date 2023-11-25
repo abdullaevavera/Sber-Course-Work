@@ -1,5 +1,6 @@
-package ru.abdullaeva.sber.backend.documents.service;
+package ru.abdullaeva.sber.backend.documents.service.interf;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.abdullaeva.sber.backend.documents.dto.DocumentDto;
 import ru.abdullaeva.sber.backend.documents.dto.IdDto;
 

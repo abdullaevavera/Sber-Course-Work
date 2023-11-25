@@ -10,6 +10,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * Список идентификаторов документов
+ */
 @Getter
 @Setter
 @Builder
