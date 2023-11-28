@@ -1,5 +1,6 @@
 package ru.abdullaeva.sber.backend.configuration.kafka;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.LongSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import java.util.Map;
  * Настройки создания кафка-продюсеров для формирования и отправки сообщений
  */
 @Configuration
+@RequiredArgsConstructor
 public class KafkaProducerConfiguration {
     /**
      * Адрес брокера сообщений

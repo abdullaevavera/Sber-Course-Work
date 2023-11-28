@@ -1,5 +1,6 @@
 package ru.abdullaeva.sber.backend.configuration.kafka;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import java.util.Map;
  * Настройка создания топиков в кафке
  */
 @Configuration
+@RequiredArgsConstructor
 public class KafkaTopicConfiguration {
     /**
      * Адрес брокера сообщений
@@ -24,13 +26,13 @@ public class KafkaTopicConfiguration {
     /**
      * Название топика для входящих сообщений
      */
-    @Value("${kafka.topic-names.outbox}")
+    @Value("${kafka.topics.outbox}")
     private String outboxMessage;
 
     /**
      * Название топика для исходящих сообщений
      */
-    @Value("${kafka.topic-names.inbox}")
+    @Value("${kafka.topics.inbox}")
     private String inboxMessage;
 
     /**

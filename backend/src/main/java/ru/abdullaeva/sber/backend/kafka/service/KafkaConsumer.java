@@ -26,7 +26,7 @@ class KafkaConsumer {
         this.inboxService = inboxService;
     }
 
-    @KafkaListener(topics = "${kafka.topic-names.outbox}")
+    @KafkaListener(topics = "${kafka.topics.outbox}")
     public Inbox consumeMessage
             (@Payload KafkaHandlingResultDto resultDto, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) Long key) {
         if (StringUtils.isEmpty(resultDto.getCode()) || resultDto.getIdDocument() == null || key == null) {

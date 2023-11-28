@@ -15,9 +15,9 @@ cors:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/courseWork
-    password: postgres
+    username: ${SPRING_DATASOURCE_USERNAME}
+    url: ${SPRING_DATASOURCE_URL}
+    password: ${SPRING_DATASOURCE_URL}
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
@@ -31,9 +31,9 @@ spring:
     change-log: classpath:liquibase/db.changelog-master.yml
 
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
 
 kafka:
-  topic-names:
+  topics:
     inbox: "inbox-mes"
     outbox: "outbox-mes"

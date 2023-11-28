@@ -34,7 +34,7 @@ public class KafkaProducer {
     /**
      *
      */
-    @Value("${kafka.topic-names.inbox}")
+    @Value("${kafka.topics.inbox}")
     private String topic;
 
     /**
