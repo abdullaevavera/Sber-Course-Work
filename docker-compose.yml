@@ -6,9 +6,9 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - '8888:8888'
+      - '8080:8888'
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/courseWork
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/courseWork
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=localhost:29092
