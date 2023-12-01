@@ -58,7 +58,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: payload
-                  type: varchar(256)
+                  type: varchar(512)
                   constraints:
                     nullable: false
 
@@ -75,7 +75,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: payload
-                  type: varchar(256)
+                  type: varchar(512)
                   constraints:
                     nullable: false
               - column:

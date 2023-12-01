@@ -1,33 +1,5 @@
 version: '2'
 services:
-  backend:
-    container_name: backend-document
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - '8080:8888'
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/courseWork
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=localhost:29092
-    depends_on:
-      - db
-      - kafka
-
-  db:
-    container_name: database-document
-    image: postgres:16-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=courseWork
-    volumes:
-      - /var/lib/postgresql/data
-
   zookeeper:
     container_name: zookeeper-document
     image: confluentinc/cp-zookeeper:latest
@@ -51,3 +23,42 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
+
+  db:
+    container_name: database-document
+    image: postgres:16-alpine
+    ports:
+      - "5430:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=courseWork
+    volumes:
+      - /var/lib/postgresql/data
+
+  backend:
+    container_name: backend-document
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '8888:8888'
+      - '5005:5005'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/courseWork
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - db
+      - kafka
+
+  ui:
+    container_name: documents-ui
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - '9000:3005'
+    depends_on:
+      - backend

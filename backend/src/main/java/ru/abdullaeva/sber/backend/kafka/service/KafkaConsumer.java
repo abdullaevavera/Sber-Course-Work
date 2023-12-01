@@ -12,6 +12,8 @@ import ru.abdullaeva.sber.backend.kafka.dto.KafkaHandlingResultDto;
 import ru.abdullaeva.sber.backend.kafka.model.Inbox;
 import ru.abdullaeva.sber.backend.kafka.service.interf.InboxService;
 
+import java.util.Optional;
+
 
 @Service
 @Slf4j
@@ -27,15 +29,15 @@ class KafkaConsumer {
     }
 
     @KafkaListener(topics = "${kafka.topics.outbox}")
-    public Inbox consumeMessage
+    public Optional<Inbox> consumeMessage
             (@Payload KafkaHandlingResultDto resultDto, @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) Long key) {
         if (StringUtils.isEmpty(resultDto.getCode()) || resultDto.getIdDocument() == null || key == null) {
             log.warn("Inbox message contains invalid data; key: " + key + " inbox message: " + resultDto);
-            return new Inbox();
+            return Optional.empty();
         }
 
-        Inbox inboxMessage = inboxService.writeUniqueMessageAtInbox(new Inbox(key, resultDto));
+        Inbox inboxMessage = inboxService.writeUniqueMessageAtInbox(resultDto, key);
         log.info("Inbox message: " + inboxMessage.getMessage() + " with id " + inboxMessage.getId() + " added");
-        return inboxMessage;
+        return Optional.of(inboxMessage);
     }
 }

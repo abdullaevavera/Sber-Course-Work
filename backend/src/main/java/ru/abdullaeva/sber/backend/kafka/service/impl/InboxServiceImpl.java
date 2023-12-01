@@ -1,7 +1,10 @@
 package ru.abdullaeva.sber.backend.kafka.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.abdullaeva.sber.backend.kafka.dto.KafkaHandlingResultDto;
 import ru.abdullaeva.sber.backend.kafka.model.Inbox;
 import ru.abdullaeva.sber.backend.kafka.repository.InboxRepository;
 import ru.abdullaeva.sber.backend.kafka.service.interf.InboxService;
@@ -10,8 +13,8 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class InboxServiceImpl implements InboxService {
-
     private final InboxRepository inboxRepository;
 
     @Autowired
@@ -20,15 +23,21 @@ public class InboxServiceImpl implements InboxService {
     }
 
     @Override
-    public Inbox writeUniqueMessageAtInbox(Inbox inboxMessage) {
-        Inbox inboxUniqueMessage = inboxRepository.findById(inboxMessage.getId()).orElse(null);
+    @Transactional
+    public Inbox writeUniqueMessageAtInbox(KafkaHandlingResultDto resultDto, Long key) {
+        String result = resultDto.toString();
+        Inbox inboxUniqueMessage = inboxRepository.findById(key).orElse(null);
         if (inboxUniqueMessage != null) {
-            throw new RuntimeException("inboxMessage with id = " + inboxMessage.getId() + " already exists");
+            throw new RuntimeException("inboxMessage with id = " + key + " already exists");
         }
-        return inboxRepository.save(inboxMessage);
+        Inbox newInboxMessage = new Inbox(key, result);
+        newInboxMessage = inboxRepository.save(newInboxMessage);
+        log.info("writeUniqueMessageAtInbox: message added to Inbox");
+        return newInboxMessage;
     }
 
     @Override
+    @Transactional
     public List<Inbox> markMessageAtInboxAsRead(Set<Long> ids) {
         List<Inbox> inboxMessages = inboxRepository.findAllById(ids);
         for (Inbox inboxMessage : inboxMessages) {
@@ -38,6 +47,7 @@ public class InboxServiceImpl implements InboxService {
     }
 
     @Override
+    @Transactional
     public List<Inbox> getUnreadMessageFromInbox() {
         return inboxRepository.findAllByCheckbox(false);
     }

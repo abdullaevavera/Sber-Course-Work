@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.abdullaeva.sber.backend.kafka.model.Outbox;
 import ru.abdullaeva.sber.backend.kafka.repository.OutboxRepository;
 import ru.abdullaeva.sber.backend.kafka.service.KafkaProducer;
@@ -26,6 +27,7 @@ public class OutboxServiceImpl implements OutboxService {
     }
 
     @Override
+    @Transactional
     public Outbox writeMessageAtOutbox(Object message) {
         String messageJson;
         try {
@@ -37,7 +39,8 @@ public class OutboxServiceImpl implements OutboxService {
     }
 
     @Override
-    @Scheduled(fixedDelay = 3000)
+    @Transactional
+    @Scheduled(fixedDelay = 60000)
     public void sendMessageFromOutbox() {
         List<Outbox> outboxMessages = outboxRepository.findAll();
         for (Outbox outboxMessage : outboxMessages) {

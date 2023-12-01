@@ -1,6 +1,7 @@
 package ru.abdullaeva.sber.backend.documents.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import ru.abdullaeva.sber.backend.documents.service.interf.DocumentService;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/documents")
 public class DocumentController {
@@ -40,6 +42,7 @@ public class DocumentController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public DocumentDto send(@RequestBody IdDto id) {
+        log.info("Method send was called");
         return documentService.update(id);
     }
 

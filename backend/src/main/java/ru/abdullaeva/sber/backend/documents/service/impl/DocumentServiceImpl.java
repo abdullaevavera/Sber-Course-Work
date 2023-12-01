@@ -1,5 +1,7 @@
 package ru.abdullaeva.sber.backend.documents.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,6 +14,7 @@ import ru.abdullaeva.sber.backend.documents.model.Document;
 import ru.abdullaeva.sber.backend.documents.model.StatusEnum;
 import ru.abdullaeva.sber.backend.documents.repository.DocumentRepository;
 import ru.abdullaeva.sber.backend.documents.service.interf.DocumentService;
+import ru.abdullaeva.sber.backend.kafka.dto.KafkaHandlingResultDto;
 import ru.abdullaeva.sber.backend.kafka.model.Inbox;
 import ru.abdullaeva.sber.backend.kafka.service.interf.InboxService;
 import ru.abdullaeva.sber.backend.kafka.service.interf.OutboxService;
@@ -21,6 +24,8 @@ import java.util.*;
 @Slf4j
 @Service
 public class DocumentServiceImpl implements DocumentService {
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private final DocumentRepository documentRepository;
     private final CustomDocumentMapper customDocumentMapper;
@@ -113,7 +118,7 @@ public class DocumentServiceImpl implements DocumentService {
     /**
      * @return
      */
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 60000)
     @Transactional
     public List<Document> readFromInboxSetHandlingResult() {
         List<Inbox> unreadMessages = inboxService.getUnreadMessageFromInbox();
@@ -121,16 +126,22 @@ public class DocumentServiceImpl implements DocumentService {
         Map<Long, String> documentsIdsAndStatusesMap = new HashMap<>();
         for (Inbox unreadMessage : unreadMessages) {
             ids.add(unreadMessage.getId());
-            documentsIdsAndStatusesMap.put
-                    (unreadMessage.getMessage().getIdDocument(), unreadMessage.getMessage().getCode());
+            try {
+                KafkaHandlingResultDto kafkaHandlingResultDto = MAPPER.readValue(unreadMessage.getMessage(), KafkaHandlingResultDto.class);
+                documentsIdsAndStatusesMap.put
+                        (kafkaHandlingResultDto.getIdDocument(), kafkaHandlingResultDto.getCode());
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("readFromInboxSetHandlingResult: Cannot deserialize kafkaHandlingResultDto object",e);
+            }
         }
         List<Document> documents = documentRepository.findAllById(documentsIdsAndStatusesMap.keySet());
 
         for (Document document : documents) {
             String status = documentsIdsAndStatusesMap.get(document.getId());
+            log.info("Status is: " + status);
 
             if (document.getStatus().equals(StatusEnum.IN_PROCESS.name())) {
-                if (status == null || !status.equals(StatusEnum.ACCEPTED.name()) && !status.equals(StatusEnum.DECLINED.name())) {
+                if (status != null && (status.equals(StatusEnum.ACCEPTED.name()) || status.equals(StatusEnum.DECLINED.name()))) {
                     document.setStatus(status);
                 }
             } else {

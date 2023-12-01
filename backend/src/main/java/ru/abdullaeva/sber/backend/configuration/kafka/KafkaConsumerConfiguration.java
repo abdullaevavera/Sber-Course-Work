@@ -45,6 +45,7 @@ public class KafkaConsumerConfiguration {
         configurationProperties.put(ConsumerConfig.GROUP_ID_CONFIG, CONSUMER_GROUP_ID);
         configurationProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class);
         configurationProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        configurationProperties.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 
         return new DefaultKafkaConsumerFactory<>
                 (configurationProperties, new LongDeserializer(), new JsonDeserializer<>(KafkaHandlingResultDto.class));

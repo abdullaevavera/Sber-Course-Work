@@ -1,5 +1,6 @@
 package ru.abdullaeva.sber.backend.kafka.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -37,7 +38,7 @@ public class Inbox {
      * Содержание входящего сообщения
      */
     @Column(name = "payload")
-    private KafkaHandlingResultDto message;
+    private String message;
 
     /**
      * Чекбокс для пометки сообщения как прочитанное
@@ -45,7 +46,7 @@ public class Inbox {
     @Column(name = "reading")
     private boolean checkbox;
 
-    public Inbox(Long id, KafkaHandlingResultDto message) {
+    public Inbox(Long id, String message) {
         this.id = id;
         this.message = message;
         this.checkbox = false;

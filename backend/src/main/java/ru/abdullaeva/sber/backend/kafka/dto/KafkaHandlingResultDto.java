@@ -1,5 +1,6 @@
 package ru.abdullaeva.sber.backend.kafka.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KafkaHandlingResultDto implements Serializable {
     /**
      * Номер версии для сериализованных данных
@@ -38,4 +40,8 @@ public class KafkaHandlingResultDto implements Serializable {
     @NotBlank
     private String code;
 
+    @Override
+    public String toString() {
+        return "{\"idDocument\" : " + idDocument + ", \"code\" : \"" + code + "\"}";
+    }
 }
