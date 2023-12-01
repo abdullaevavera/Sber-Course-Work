@@ -1,4 +1,5 @@
 rootProject.name = 'SberCourseWork'
 
-include 'ui'
 include 'backend'
+include 'ui'
+
