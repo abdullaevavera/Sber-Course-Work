@@ -1,0 +1,12 @@
+{
+  "id" : 1,
+  "type" : "Карта",
+  "organization" : "Городская больница",
+  "description" : "карта пациента",
+  "patient" : "Иванов Иван Иванович",
+  "date" : null,
+  "status" : {
+    "code" : "NEW",
+    "name" : "Новый"
+  }
+}

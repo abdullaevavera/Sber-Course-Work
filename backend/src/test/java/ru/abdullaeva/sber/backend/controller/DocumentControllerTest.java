@@ -92,7 +92,7 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void sendTest() throws Exception {
+    public void successWhenSendTest() throws Exception {
         Resource resource = new ClassPathResource(SAVE_NEW_DOCUMENT_MOCK);
         InputStream inputStream = new BufferedInputStream(resource.getInputStream());
         DocumentDto documentDto = mapper.readValue(inputStream, DocumentDto.class);
@@ -102,14 +102,14 @@ public class DocumentControllerTest {
     }
 
     @Test
-    public void deleteTest() throws Exception {
+    public void successWhenDeleteTest() throws Exception {
         Long id = 1L;
         doNothing().when(service).delete(id);
         mockMvc.perform(delete(PATH + "/{id}", id)).andExpect(status().isOk());
     }
 
     @Test
-    public void deleteAllTest() throws Exception {
+    public void successWhenDeleteAllTest() throws Exception {
         IdsDto idsDto = new IdsDto();
         idsDto.setIds(Set.of(5L, 6L));
         doNothing().when(service).deleteAll(idsDto.getIds());

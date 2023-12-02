@@ -31,23 +31,23 @@ public class CustomDocumentMapper {
     /**
      * Метод устанавливает название статуса в зависимости от установленного кода.
      */
-    private Status initStatus (String statusCode){
-            switch (statusCode) {
-                case ("NEW") -> {
-                    return Status.of(statusCode, "Новый");
-                }
-                case ("IN_PROCESS") -> {
-                    return Status.of(statusCode, "В процессе");
-                }
-                case ("ACCEPTED") -> {
-                    return Status.of(statusCode, "Принят");
-                }
-                case ("DECLINED") -> {
-                    return Status.of(statusCode, "Отклонен");
-                }
-                default -> {
-                }
+    private Status initStatus(String statusCode) {
+        switch (statusCode) {
+            case ("NEW") -> {
+                return Status.of(statusCode, "Новый");
             }
-            return new Status();
+            case ("IN_PROCESS") -> {
+                return Status.of(statusCode, "В процессе");
+            }
+            case ("ACCEPTED") -> {
+                return Status.of(statusCode, "Принят");
+            }
+            case ("DECLINED") -> {
+                return Status.of(statusCode, "Отклонен");
+            }
+            default -> {
+            }
         }
+        return new Status();
+    }
 }
