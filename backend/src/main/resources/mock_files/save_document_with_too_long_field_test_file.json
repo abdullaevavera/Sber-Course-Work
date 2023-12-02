@@ -1,0 +1,6 @@
+{
+  "type" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc viverra nulla ligula, id congue dui luctus vulputate. Quisque ornare dui ac nisi ultrices, vitae posuere sapien ultrices. Etiam ut ultrices dolor. Sed pretium faucibus ex sit amet ornare. Duis nec consequat nisl, a egestas diam. Mauris pharetra, ligula ut fermentum aliquet, sem ante interdum nisl, ac auctor diam purus eget nulla. Ut posuere sapien erat, vitae bibendum justo venenatis vestibulum. Aenean ante massa, bibendum a ipsum vitae, placerat lacinia sapien. Cras sed pretium ex, eu elementum dui. Fusce in ipsum ipsum. Fusce a blandit libero. Aliquam blandit feugiat dapibus. Proin mattis, risus in semper sodales, est leo dictum turpis, nec sollicitudin diam massa in metus. Mauris non pretium risus. Duis tincidunt suscipit nisl at auctor.",
+  "organization" : "Городская больница",
+  "description" : "карта пациента",
+  "patient" : "Иванов Иван Иванович"
+}

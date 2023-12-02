@@ -46,4 +46,5 @@ dependencies {
 
 test {
     include('ru/abdullaeva/sber/**')
+    useJUnitPlatform()
 }
