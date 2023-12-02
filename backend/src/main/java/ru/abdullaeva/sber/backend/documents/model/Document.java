@@ -27,8 +27,9 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Document {
+
     /**
-     * Идентификатор документа
+     * Идентификатор документа.
      */
     @Id
     @EqualsAndHashCode.Include
@@ -37,37 +38,37 @@ public class Document {
     private Long id;
 
     /**
-     * Тип документа
+     * Тип документа.
      */
     @Column(name = "type")
     private String type;
 
     /**
-     * Медицинская организация - владелец документа
+     * Медицинская организация - владелец документа.
      */
     @Column(name = "organization")
     private String organization;
 
     /**
-     * Дата и время создания документа
+     * Дата и время создания документа.
      */
     @Column(name = "date")
     private Date date;
 
     /**
-     * Описание документа
+     * Описание документа.
      */
     @Column(name = "description")
     private String description;
 
     /**
-     * Пациент, к которому относится документ
+     * Пациент, к которому относится документ.
      */
     @Column(name = "patient")
     private String patient;
 
     /**
-     * Статус документа
+     * Статус документа.
      */
     @Column(name = "status")
     private String status;

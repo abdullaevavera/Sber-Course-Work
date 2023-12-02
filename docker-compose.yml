@@ -54,7 +54,7 @@ services:
       - kafka
 
   ui:
-    container_name: documents-ui
+    container_name: ui-document
     build:
       context: ./ui
       dockerfile: Dockerfile

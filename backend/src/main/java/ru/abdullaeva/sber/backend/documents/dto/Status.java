@@ -20,15 +20,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Status implements Serializable {
+
     /**
-     * Код статуса
+     * Код статуса.
      */
     @NotBlank
     @Length(max = 16)
     private String code;
 
     /**
-     * Название статуса
+     * Название статуса.
      */
     @NotNull
     private String name;

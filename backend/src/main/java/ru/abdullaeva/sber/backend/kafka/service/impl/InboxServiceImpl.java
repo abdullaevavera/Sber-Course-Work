@@ -1,6 +1,5 @@
 package ru.abdullaeva.sber.backend.kafka.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Slf4j
 public class InboxServiceImpl implements InboxService {
     private final InboxRepository inboxRepository;
 
@@ -32,7 +30,6 @@ public class InboxServiceImpl implements InboxService {
         }
         Inbox newInboxMessage = new Inbox(key, result);
         newInboxMessage = inboxRepository.save(newInboxMessage);
-        log.info("writeUniqueMessageAtInbox: message added to Inbox");
         return newInboxMessage;
     }
 

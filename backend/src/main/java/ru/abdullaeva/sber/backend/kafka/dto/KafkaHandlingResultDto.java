@@ -22,20 +22,21 @@ import java.io.Serializable;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KafkaHandlingResultDto implements Serializable {
+
     /**
-     * Номер версии для сериализованных данных
+     * Номер версии для сериализованных данных.
      */
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
-     * Идентификатор обработанного документа
+     * Идентификатор обработанного документа.
      */
     @NotNull
     private Long idDocument;
 
     /**
-     * Статус документа после обработки
+     * Статус документа после обработки.
      */
     @NotBlank
     private String code;

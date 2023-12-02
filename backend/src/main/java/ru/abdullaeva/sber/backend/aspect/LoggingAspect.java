@@ -16,11 +16,10 @@ import java.util.logging.Logger;
 @Component
 @Aspect
 public class LoggingAspect {
-
     private final Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
     /**
-     * Точка среза для сервисов
+     * Точка среза для сервисов.
      */
     @Pointcut("within(ru.abdullaeva.sber.backend.documents.service.impl.DocumentServiceImpl)")
     public void documentServicePointCut() {
@@ -28,7 +27,7 @@ public class LoggingAspect {
     }
 
     /**
-     * Точка среза для контроллера
+     * Точка среза для контроллера.
      */
     @Pointcut("within(ru.abdullaeva.sber.backend.documents.controller.*)")
     public void controllerPointCut() {
@@ -36,8 +35,8 @@ public class LoggingAspect {
     }
 
     /**
-     * Advice - набор инструкций, выполняемых вокруг методов сервисов
-     * @param joinPoint - точка выполнения программы - вызов метода
+     * Advice - набор инструкций, выполняемых вокруг методов сервисов.
+     * @param joinPoint - точка выполнения программы - вызов метода.
      */
     @Around("documentServicePointCut()")
     public Object documentServiceMethodLog(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -54,8 +53,8 @@ public class LoggingAspect {
     }
 
     /**
-     * Advice - набор инструкций, выполняемых вокруг запросов контроллера
-     * @param joinPoint - точка выполнения программы - вызов запроса
+     * Advice - набор инструкций, выполняемых вокруг запросов контроллера.
+     * @param joinPoint - точка выполнения программы - вызов запроса.
      */
     @Around("controllerPointCut()")
     public Object controllerMethodLog(ProceedingJoinPoint joinPoint) throws Throwable {

@@ -26,8 +26,9 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Outbox {
+
     /**
-     * Идентификатор исходящего сообщения
+     * Идентификатор исходящего сообщения.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public class Outbox {
     private Long id;
 
     /**
-     * Содержание исходящего сообщения
+     * Содержание исходящего сообщения.
      */
     @Column(name = "payload")
     private String message;

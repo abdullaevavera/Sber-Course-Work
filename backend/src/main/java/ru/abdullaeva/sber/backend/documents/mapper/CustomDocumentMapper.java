@@ -12,8 +12,9 @@ import ru.abdullaeva.sber.backend.documents.dto.Status;
 @Component
 @RequiredArgsConstructor
 public class CustomDocumentMapper {
+
     /**
-     * Метод маппит сущность "документ" на дто документа
+     * Метод маппит сущность "документ" на дто документа.
      */
     public DocumentDto documentToDocumentDto(Document document) {
         DocumentDto documentDto = new DocumentDto();
@@ -28,7 +29,7 @@ public class CustomDocumentMapper {
     }
 
     /**
-     * Метод устанавливает название статуса в зависимости от установленного кода
+     * Метод устанавливает название статуса в зависимости от установленного кода.
      */
     private Status initStatus (String statusCode){
             switch (statusCode) {

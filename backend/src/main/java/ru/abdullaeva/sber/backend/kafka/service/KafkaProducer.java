@@ -14,15 +14,11 @@ import ru.abdullaeva.sber.backend.kafka.model.Outbox;
 import java.util.concurrent.ExecutionException;
 
 /**
- *
+ * Кафка-продюссер для отправки сообщений в кафка
  */
 @Service
 @Slf4j
 public class KafkaProducer {
-
-    /**
-     *
-     */
     private final KafkaTemplate<Long, Outbox> kafkaTemplate;
 
     @Autowired
@@ -30,17 +26,23 @@ public class KafkaProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-
     /**
-     *
+     * Название кафка-топика, в который будет отправлено сообщение.
      */
     @Value("${kafka.topics.inbox}")
     private String topic;
 
     /**
+     * Метод отправляет сообщения в кафка-топик "inbox-mes".
+     * При отправке сообщения в кафка используется синхронная стратегия отправки,
+     * когда мы ждём от кафка результат отправки во future.get().
+     * Сообщением, отправляемым в кафка, является содержимое сообщения из таблицы Outbox.
+     * После успешной отправки сообщения в кафка сообщение из таблицы Outbox
+     * удаляется, чтобы избежать повторной отправки.
      *
-     * @param outboxMessage
-     * @return
+     * @param outboxMessage - содержимое сообщения для отправки. В качестве уникального ключа
+     *                      сообщения будет отправлен идентификатор сообщения в Outbox.
+     * @return - результат отправки сообщения в кафка.
      */
     public ProducerRecord<Long, Outbox> sendMessage(Outbox outboxMessage) {
         ListenableFuture<SendResult<Long, Outbox>> future

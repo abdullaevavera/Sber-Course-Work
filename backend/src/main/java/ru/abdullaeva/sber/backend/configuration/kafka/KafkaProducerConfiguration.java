@@ -21,14 +21,15 @@ import java.util.Map;
 @Configuration
 @RequiredArgsConstructor
 public class KafkaProducerConfiguration {
+
     /**
-     * Адрес брокера сообщений
+     * Адрес брокера сообщений.
      */
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     /**
-     * Компонент, отвечающий за создание экземпляров кафка-продюсеров
+     * Компонент, отвечающий за создание экземпляров кафка-продюсеров.
      */
     @Bean
     public ProducerFactory<Long, Outbox> producerFactory() {
@@ -40,8 +41,8 @@ public class KafkaProducerConfiguration {
     }
 
     /**
-     * Компонент-обёртка, предоставляющий экземплярам продюсеров методы
-     * для отправки сообщений в определённые топики кафка
+     * Компонент-обёртка, предоставляющий экземплярам продюсеров методы.
+     * для отправки сообщений в определённые топики кафка.
      */
     @Bean
     public KafkaTemplate<Long, Outbox> kafkaTemplate(ProducerFactory<Long, Outbox> producerFactory) {

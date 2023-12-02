@@ -11,8 +11,9 @@ import java.util.List;
  */
 @Repository
 public interface InboxRepository extends JpaRepository<Inbox, Long> {
+
     /**
-     * Метод для поиска непрочитанных сообщений полученных из кафка
+     * Метод для поиска непрочитанных сообщений полученных из кафка.
      */
     public List<Inbox> findAllByCheckbox(boolean checkbox);
 }

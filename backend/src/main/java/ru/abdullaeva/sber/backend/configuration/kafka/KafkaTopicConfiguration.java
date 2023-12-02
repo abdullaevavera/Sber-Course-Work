@@ -12,31 +12,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Настройка создания топиков в кафке
+ * Настройка создания топиков в кафка
  */
 @Configuration
 @RequiredArgsConstructor
 public class KafkaTopicConfiguration {
+
     /**
-     * Адрес брокера сообщений
+     * Адрес брокера сообщений.
      */
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     /**
-     * Название топика для входящих сообщений
+     * Название топика для входящих сообщений.
      */
     @Value("${kafka.topics.outbox}")
     private String outboxMessage;
 
     /**
-     * Название топика для исходящих сообщений
+     * Название топика для исходящих сообщений.
      */
     @Value("${kafka.topics.inbox}")
     private String inboxMessage;
 
     /**
-     * Компонент, отвечающий за создание новых топиков в кафка
+     * Компонент, отвечающий за создание новых топиков в кафка.
      */
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -46,8 +47,8 @@ public class KafkaTopicConfiguration {
     }
 
     /**
-     * Компонент, отвечающий за создание топика, в который
-     * будут записываться документы, отправленные в стадию обработки
+     * Компонент, отвечающий за создание топика, в который.
+     * будут записываться документы, отправленные в стадию обработки.
      */
     @Bean
     public NewTopic outboxMessageTopic() {
@@ -55,8 +56,8 @@ public class KafkaTopicConfiguration {
     }
 
     /**
-     * Компонент, отвечающий за создание топика, из которого
-     * будут читаться документы после стадии обработки
+     * Компонент, отвечающий за создание топика, из которого.
+     * будут читаться документы после стадии обработки.
      */
     @Bean
     public NewTopic inboxMessageTopic() {

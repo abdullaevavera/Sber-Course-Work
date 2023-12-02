@@ -1,13 +1,11 @@
 package ru.abdullaeva.sber.backend.kafka.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.abdullaeva.sber.backend.kafka.dto.KafkaHandlingResultDto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +24,9 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Inbox {
+
     /**
-     * Идентификатор входящего сообщения - уникальный ключ полученного из кафка сообщения
+     * Идентификатор входящего сообщения - уникальный ключ полученного из кафка сообщения.
      */
     @Id
     @EqualsAndHashCode.Include
@@ -35,13 +34,13 @@ public class Inbox {
     private Long id;
 
     /**
-     * Содержание входящего сообщения
+     * Содержание входящего сообщения.
      */
     @Column(name = "payload")
     private String message;
 
     /**
-     * Чекбокс для пометки сообщения как прочитанное
+     * Чекбокс для пометки сообщения как прочитанное.
      */
     @Column(name = "reading")
     private boolean checkbox;

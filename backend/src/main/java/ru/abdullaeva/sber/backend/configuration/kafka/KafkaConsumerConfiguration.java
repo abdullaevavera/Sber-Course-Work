@@ -24,19 +24,20 @@ import java.util.Map;
 @EnableKafka
 @RequiredArgsConstructor
 public class KafkaConsumerConfiguration {
+
     /**
-     * Название группы кафка-консьюмеров
+     * Название группы кафка-консьюмеров.
      */
     private static final String CONSUMER_GROUP_ID = "group-id";
 
     /**
-     * Адрес брокера сообщений
+     * Адрес брокера сообщений.
      */
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
     /**
-     * Компонент, отвечающий за создание экземпляров кафка-консьюмеров
+     * Компонент, отвечающий за создание экземпляров кафка-консьюмеров.
      */
     @Bean
     public ConsumerFactory<Long, KafkaHandlingResultDto> consumerFactory() {
@@ -52,8 +53,8 @@ public class KafkaConsumerConfiguration {
     }
 
     /**
-     * Компонент, отвечающий за потокобезопасность работы кафка-консьюмеров
-     * и синхронную фиксацию смещений сообщения в топиках - offset
+     * Компонент, отвечающий за потокобезопасность работы кафка-консьюмеров.
+     * и синхронную фиксацию смещений сообщения в топиках - offset.
      */
     @Bean
     public ConcurrentKafkaListenerContainerFactory<Long, KafkaHandlingResultDto> kafkaListenerContainerFactory(

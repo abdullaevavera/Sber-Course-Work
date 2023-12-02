@@ -19,14 +19,18 @@ import ru.abdullaeva.sber.backend.kafka.model.Inbox;
 import ru.abdullaeva.sber.backend.kafka.service.interf.InboxService;
 import ru.abdullaeva.sber.backend.kafka.service.interf.OutboxService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 @Service
 public class DocumentServiceImpl implements DocumentService {
-
     private static final ObjectMapper MAPPER = new ObjectMapper();
-
     private final DocumentRepository documentRepository;
     private final CustomDocumentMapper customDocumentMapper;
     private final OutboxService outboxService;
@@ -115,6 +119,7 @@ public class DocumentServiceImpl implements DocumentService {
         }
         return customDocumentMapper.documentToDocumentDto(document);
     }
+
     /**
      * @return
      */

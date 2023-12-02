@@ -23,47 +23,48 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DocumentDto implements Serializable {
+
     /**
-     * Идентификатор документа
+     * Идентификатор документа.
      */
     private Long id;
 
     /**
-     * Тип документа
+     * Тип документа.
      */
     @NotNull
     @Length(max = 256)
     private String type;
 
     /**
-     * Медицинская организация - владелец документа
+     * Медицинская организация - владелец документа.
      */
     @NotNull
     @Length(max = 256)
     private String organization;
 
     /**
-     * Описание документа
+     * Описание документа.
      */
     @NotNull
     @Length(max = 512)
     private String description;
 
     /**
-     * Пациент, к которому относится документ
+     * Пациент, к которому относится документ.
      */
     @NotNull
     @Length(max = 256)
     private String patient;
 
     /**
-     * Дата и время создания документа
+     * Дата и время создания документа.
      */
     @NotNull
     private Date date;
 
     /**
-     * Статус документа
+     * Статус документа.
      */
     @Valid
     private Status status;
