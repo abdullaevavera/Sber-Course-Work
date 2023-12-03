@@ -40,7 +40,7 @@ public class OutboxServiceImpl implements OutboxService {
 
     @Override
     @Transactional
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 3000)
     public void sendMessageFromOutbox() {
         List<Outbox> outboxMessages = outboxRepository.findAll();
         for (Outbox outboxMessage : outboxMessages) {
